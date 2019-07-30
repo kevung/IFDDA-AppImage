@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=IFDDA
+Comment=Idiot-Friendly Discrete Dipole Approximation
+Exec=cdm
+Icon=postmanpat
+Type=Application
+Categories=Utility;
+MimeType=application/x-sharedlib;
