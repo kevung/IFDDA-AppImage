@@ -1,7 +1,6 @@
 # download latest IFDDA version
 clone(){
-	git clone
-	https://github.com/pchaumet/IF-DDA.git \
+	git clone https://github.com/pchaumet/IF-DDA.git \
 		--branch fftw
 }
 
