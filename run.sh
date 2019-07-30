@@ -1,5 +1,6 @@
 # Build AppImage form IFDDA sources
 # Function on x64 architectures
+# BUG: hdf5 version does not work yet
 
 # download latest IFDDA version
 clone(){
@@ -43,11 +44,30 @@ make_appimage_hdf5(){
 		-e IF-DDA/cdm/cdm \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
-		--library /usr/lib/libc.so.6 \ #causes segmentation fault
 		--library /usr/lib/libm.so.6 \
+		--library /usr/lib/libc.so.6 \ #cause segmentation fault
 		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
 		--library /usr/lib/libicui18n.so.64 \
 		--output appimage
+		# --library /usr/lib/libGL.so.1 \
+		# --library /usr/lib/libstdc++.so.6 \
+		# --library /usr/lib/libgcc_s.so.1 \
+		# --library /usr/lib64/ld-linux-x86-64.so.2 \
+		# --library /usr/lib/libpthread.so.0 \
+		# --library /usr/lib/libX11.so.6 \
+		# --library /usr/lib/libdl.so.2 \
+		# --library /usr/lib/libz.so.1 \
+		# --library /usr/lib/libfreetype.so.6 \
+		# --library /usr/lib/libglib-2.0.so.0 \
+		# --library /usr/lib/libgobject-2.0.so.0 \
+		# --library /usr/lib/libSM.so.6 \
+		# --library /usr/lib/libICE.so.6 \
+		# --library /usr/lib/libfontconfig.so.1 \
+		# --library /usr/lib/librt.so.1 \
+		# --library /usr/lib/libxcb.so.1 \
+		# --library /usr/lib/libharfbuzz.so.0 \
+		# --library /usr/lib/libuuid.so.1 \
+		# --library /usr/lib/libexpat.so.1 \
 }
 
 clean(){
