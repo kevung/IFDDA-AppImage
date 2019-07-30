@@ -1,2 +1,5 @@
 Create AppImage from binaries of IFDDA
 From latest version of git repository
+
+The script assumes that all the libraries and
+tools are installed to build IF-DDA.
