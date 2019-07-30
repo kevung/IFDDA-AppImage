@@ -1,12 +1,16 @@
+# Build AppImage form IFDDA sources
+# Function on x64 architectures
+
 # download latest IFDDA version
 clone(){
-	git clone https://github.com/pchaumet/IF-DDA.git \
-		--branch fftw
+	git clone https://github.com/pchaumet/IF-DDA.git
 }
 
 # install
 install(){
 	cd IF-DDA
+	git checkout fftw
+	# git checkout hdf5fftw
 	qmake-qt4
 	make
 	make install
@@ -27,17 +31,35 @@ make_appimage(){
 		-e IF-DDA/cdm/cdm \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
+		--library /usr/lib/libm.so.6 \
+		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
+		--library /usr/lib/libicui18n.so.64 \
+		--output appimage
+}
+
+# create IFDDA AppImage
+make_appimage_hdf5(){
+	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
+		-e IF-DDA/cdm/cdm \
+		-d ./ifdda.desktop \
+		-i ./postmanpat.png \
+		--library /usr/lib/libc.so.6 \ #causes segmentation fault
+		--library /usr/lib/libm.so.6 \
+		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
+		--library /usr/lib/libicui18n.so.64 \
 		--output appimage
 }
 
 clean(){
 	rm -rf IF-DDA
 	rm *.AppImage
+	rm -rf AppDir
 }
 
 ###########
+clean
 clone
 install
 get_appimages
 make_appimage
-# clean
+# make_appimage_hdf5
