@@ -1,6 +1,8 @@
 # download latest IFDDA version
 clone(){
-	git clone https://github.com/pchaumet/IF-DDA.git
+	git clone
+	https://github.com/pchaumet/IF-DDA.git \
+		--branch fftw
 }
 
 # install
@@ -35,8 +37,8 @@ clean(){
 }
 
 ###########
-# clone
-# install
-# get_appimages
+clone
+install
+get_appimages
 make_appimage
 # clean
