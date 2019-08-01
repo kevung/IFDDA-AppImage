@@ -97,9 +97,9 @@ clean(){
 }
 
 ###########
-# clean
-# clone
-# install
-# get_appimages
+clean
+clone
+install
+get_appimages
 make_appimage
 # make_appimage_hdf5
