@@ -40,6 +40,7 @@ make_appimage(){
 	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
 		-e IF-DDA/cdm/cdm \
 		-d ./ifdda.desktop \
+		-i ./postmanpat.png 
 		-i ./postmanpat.png \
 		--library /usr/lib/libm.so.6 \
 		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
@@ -48,6 +49,35 @@ make_appimage(){
 		./linuxdeploy-x86_64.AppImage --appdir=AppDir \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
+			--library /usr/lib/libdl.so.2 \
+			--library /usr/lib/libpthread.so.0 \
+			--library /usr/lib/libz.so.1 \
+			--library /usr/lib/libc.so.6 \
+			--library /usr/lib/libfuse.so.2 \
+			--library /usr/lib/libGLU.so.1 \
+			--library /usr/lib/libGL.so.1 \
+			--library /usr/lib/libstdc++.so.6 \
+			--library /usr/lib/libgcc_s.so.1 \
+			--library /usr/lib/libGLX.so.0 \
+			--library /usr/lib/libGLdispatch.so.0 \
+			--library /usr/lib/libX11.so.6 \
+			--library /usr/lib/libglib-2.0.so.0 \
+			--library /usr/lib/libgobject-2.0.so.0 \
+			--library /usr/lib/libSM.so.6 \
+			--library /usr/lib/libICE.so.6 \
+			--library /usr/lib/libfontconfig.so.1 \
+			--library /usr/lib/librt.so.1 \
+			--library /usr/lib/libutil.so.1 \
+			--library /usr/lib/libharfbuzz.so.0 \
+			--library /usr/lib/libxcb.so.1 \
+			--library /usr/lib/libpcre.so.1 \
+			--library /usr/lib/libffi.so.6 \
+			--library /usr/lib/libuuid.so.1 \
+			--library /usr/lib/libbsd.so.0 \
+			--library /usr/lib/libexpat.so.1 \
+			--library /usr/lib/libgraphite2.so.3 \
+			--library /usr/lib/libXau.so.6 \
+			--library /usr/lib/libXdmcp.so.6 \
 			--library /usr/lib/libhdf5hl_fortran.so.100 
 	fi;
 	cp -r /usr/lib/qt4/plugins/sqldrivers \
@@ -65,8 +95,8 @@ clean(){
 }
 
 ###########
-clean
-clone
-install
-get_appimages
+# clean
+# clone
+# install
+# get_appimages
 make_appimage
