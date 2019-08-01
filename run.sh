@@ -6,7 +6,7 @@
 
 # download latest IFDDA version
 
-HDF5=0 #0->fftw 1->hdf5
+HDF5=1 #0->fftw 1->hdf5
 
 clone(){
 	git clone https://github.com/pchaumet/IF-DDA.git
@@ -46,11 +46,15 @@ make_appimage(){
 		--library /usr/lib/libicui18n.so.64 
 	if [[ $HDF5 == 1 ]]; then
 		./linuxdeploy-x86_64.AppImage --appdir=AppDir \
+		-d ./ifdda.desktop \
+		-i ./postmanpat.png \
 			--library /usr/lib/libhdf5hl_fortran.so.100 
 	fi;
 	cp -r /usr/lib/qt4/plugins/sqldrivers \
 		./AppDir/usr/bin
 	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
+		-d ./ifdda.desktop \
+		-i ./postmanpat.png \
 		--output appimage
 }
 
