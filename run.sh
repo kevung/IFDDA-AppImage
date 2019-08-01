@@ -7,6 +7,7 @@
 # download latest IFDDA version
 
 HDF5=1 #0->fftw 1->hdf5
+LIBPATH=/usr/lib
 
 clone(){
 	git clone https://github.com/pchaumet/IF-DDA.git
@@ -43,46 +44,46 @@ make_appimage(){
 		-e IF-DDA/cdm/cdm \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
-		--library /usr/lib/libm.so.6 \
-		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
-		--library /usr/lib/libicui18n.so.64 
+		--library $LIBPATH/libm.so.6 \
+		--library $LIBPATH/gtk-2.0/modules/libcanberra-gtk-module.so \
+		--library $LIBPATH/libicui18n.so.64 
 	if [[ $HDF5 == 1 ]]; then
 		./linuxdeploy-x86_64.AppImage --appdir=AppDir \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
-			--library /usr/lib/libdl.so.2 \
-			--library /usr/lib/libpthread.so.0 \
-			--library /usr/lib/libz.so.1 \
-			--library /usr/lib/libc.so.6 \
-			--library /usr/lib/libfuse.so.2 \
-			--library /usr/lib/libfreetype.so.6 \
-			--library /usr/lib/libGLU.so.1 \
-			--library /usr/lib/libGL.so.1 \
-			--library /usr/lib/libstdc++.so.6 \
-			--library /usr/lib/libgcc_s.so.1 \
-			--library /usr/lib/libGLX.so.0 \
-			--library /usr/lib/libGLdispatch.so.0 \
-			--library /usr/lib/libX11.so.6 \
-			--library /usr/lib/libglib-2.0.so.0 \
-			--library /usr/lib/libgobject-2.0.so.0 \
-			--library /usr/lib/libSM.so.6 \
-			--library /usr/lib/libICE.so.6 \
-			--library /usr/lib/libfontconfig.so.1 \
-			--library /usr/lib/librt.so.1 \
-			--library /usr/lib/libutil.so.1 \
-			--library /usr/lib/libharfbuzz.so.0 \
-			--library /usr/lib/libxcb.so.1 \
-			--library /usr/lib/libpcre.so.1 \
-			--library /usr/lib/libffi.so.6 \
-			--library /usr/lib/libuuid.so.1 \
-			--library /usr/lib/libbsd.so.0 \
-			--library /usr/lib/libexpat.so.1 \
-			--library /usr/lib/libgraphite2.so.3 \
-			--library /usr/lib/libXau.so.6 \
-			--library /usr/lib/libXdmcp.so.6 \
-			--library /usr/lib/libhdf5hl_fortran.so.100 
+			--library $LIBPATH/libdl.so.2 \
+			--library $LIBPATH/libpthread.so.0 \
+			--library $LIBPATH/libz.so.1 \
+			--library $LIBPATH/libc.so.6 \
+			--library $LIBPATH/libfuse.so.2 \
+			--library $LIBPATH/libfreetype.so.6 \
+			--library $LIBPATH/libGLU.so.1 \
+			--library $LIBPATH/libGL.so.1 \
+			--library $LIBPATH/libstdc++.so.6 \
+			--library $LIBPATH/libgcc_s.so.1 \
+			--library $LIBPATH/libGLX.so.0 \
+			--library $LIBPATH/libGLdispatch.so.0 \
+			--library $LIBPATH/libX11.so.6 \
+			--library $LIBPATH/libglib-2.0.so.0 \
+			--library $LIBPATH/libgobject-2.0.so.0 \
+			--library $LIBPATH/libSM.so.6 \
+			--library $LIBPATH/libICE.so.6 \
+			--library $LIBPATH/libfontconfig.so.1 \
+			--library $LIBPATH/librt.so.1 \
+			--library $LIBPATH/libutil.so.1 \
+			--library $LIBPATH/libharfbuzz.so.0 \
+			--library $LIBPATH/libxcb.so.1 \
+			--library $LIBPATH/libpcre.so.1 \
+			--library $LIBPATH/libffi.so.6 \
+			--library $LIBPATH/libuuid.so.1 \
+			--library $LIBPATH/libbsd.so.0 \
+			--library $LIBPATH/libexpat.so.1 \
+			--library $LIBPATH/libgraphite2.so.3 \
+			--library $LIBPATH/libXau.so.6 \
+			--library $LIBPATH/libXdmcp.so.6 \
+			--library $LIBPATH/libhdf5hl_fortran.so.100 
 	fi;
-	cp -r /usr/lib/qt4/plugins/sqldrivers \
+	cp -r $LIBPATH/qt4/plugins/sqldrivers \
 		./AppDir/usr/bin
 	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
 		-d ./ifdda.desktop \
