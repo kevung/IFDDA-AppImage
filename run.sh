@@ -81,9 +81,9 @@ make_appimage_hdf5(){
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
 		--library /usr/lib/libm.so.6 \
-		--library /usr/lib/libc.so.6 \ #cause segmentation fault
 		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
-		--library /usr/lib/libicui18n.so.64 
+		--library /usr/lib/libicui18n.so.64 \
+		--library /usr/lib/libhdf5hl_fortran.so.100 
 	cp -r /usr/lib/qt4/plugins/sqldrivers \
 		./AppDir/usr/bin
 	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
@@ -101,5 +101,5 @@ clean
 clone
 install
 get_appimages
-make_appimage
-# make_appimage_hdf5
+# make_appimage
+make_appimage_hdf5
