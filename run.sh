@@ -35,12 +35,13 @@ get_appimages(){
 	chmod +x linuxdeploy-plugin-appimage-x86_64.AppImage
 }
 
+# pour debuger, LD_DEBUG=libs ./IFDDA.AppImage et
+# sudo strace -f ./IFDDA.AppImage
 # create IFDDA AppImage
 make_appimage(){
 	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
 		-e IF-DDA/cdm/cdm \
 		-d ./ifdda.desktop \
-		-i ./postmanpat.png 
 		-i ./postmanpat.png \
 		--library /usr/lib/libm.so.6 \
 		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
@@ -54,6 +55,7 @@ make_appimage(){
 			--library /usr/lib/libz.so.1 \
 			--library /usr/lib/libc.so.6 \
 			--library /usr/lib/libfuse.so.2 \
+			--library /usr/lib/libfreetype.so.6 \
 			--library /usr/lib/libGLU.so.1 \
 			--library /usr/lib/libGL.so.1 \
 			--library /usr/lib/libstdc++.so.6 \
