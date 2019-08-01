@@ -5,6 +5,9 @@
 # ~BUG3: parametres par defauts a changer
 
 # download latest IFDDA version
+
+HDF5=0 #0->fftw 1->hdf5
+
 clone(){
 	git clone https://github.com/pchaumet/IF-DDA.git
 }
@@ -12,8 +15,11 @@ clone(){
 # install
 install(){
 	cd IF-DDA
-	git checkout fftw
-	# git checkout hdf5fftw
+	if [[ $HDF5 == 1 ]]; then
+		git checkout hdf5fftw
+	else
+		git checkout fftw
+	fi;
 	qmake-qt4
 	make
 	make install
@@ -38,52 +44,10 @@ make_appimage(){
 		--library /usr/lib/libm.so.6 \
 		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
 		--library /usr/lib/libicui18n.so.64 
-	cp -r /usr/lib/qt4/plugins/sqldrivers \
-		./AppDir/usr/bin
-	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
-		--output appimage
-		# --library /usr/lib/libz.so.1 \
-		# --library /usr/lib/librt.so.1 \
-		# --library /usr/lib/libresolv.so.2 \
-		# --library /usr/lib/libharfbuzz.so.0 \
-		# --library /usr/lib/libfribidi.so.0 \
-		# --library /usr/lib/libthai.so.0 \
-		# --library /usr/lib/libexpat.so.1 \
-		# --library /usr/lib/libuuid.so.1 \
-		# --library /usr/lib/libstdc++.so.6 \
-		# --library /usr/lib/libgcc_s.so.1 \
-		# --library /usr/lib/libcom_err.so.2 \
-		# --library /usr/lib/libkeyutils.so.1 \
-		# --library /usr/lib/libGL.so.1 \
-		# --library /usr/lib64/ld-linux-x86-64.so.2 \
-		# --library /usr/lib/libSM.so.6 \
-		# --library /usr/lib/libICE.so.6 \
-		# --library /usr/lib/libgobject-2.0.so.0 \
-		# --library /usr/lib/libglib-2.0.so.0 \
-		# --library /usr/lib/libc.so.6 \
-		# --library /usr/lib/libX11.so.6 \
-		# --library /usr/lib/libpthread.so.0 \
-		# --library /usr/lib/libpangocairo-1.0.so.0 \
-		# --library /usr/lib/libgdk_pixbuf-2.0.so.0 \
-		# --library /usr/lib/libgio-2.0.so.0 \
-		# --library /usr/lib/libpangoft2-1.0.so.0 \
-		# --library /usr/lib/libpango-1.0.so.0 \
-		# --library /usr/lib/libfontconfig.so.1 \
-		# --library /usr/lib/libxcb.so.1 \
-		# --library /usr/lib/libdl.so.2 \
-		# --library /usr/lib/libfreetype.so.6 \
-}
-
-# create IFDDA AppImage
-make_appimage_hdf5(){
-	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
-		-e IF-DDA/cdm/cdm \
-		-d ./ifdda.desktop \
-		-i ./postmanpat.png \
-		--library /usr/lib/libm.so.6 \
-		--library /usr/lib/gtk-2.0/modules/libcanberra-gtk-module.so \
-		--library /usr/lib/libicui18n.so.64 \
-		--library /usr/lib/libhdf5hl_fortran.so.100 
+	if [[ $HDF5 == 1 ]]; then
+		./linuxdeploy-x86_64.AppImage --appdir=AppDir \
+			--library /usr/lib/libhdf5hl_fortran.so.100 
+	fi;
 	cp -r /usr/lib/qt4/plugins/sqldrivers \
 		./AppDir/usr/bin
 	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
@@ -101,5 +65,4 @@ clean
 clone
 install
 get_appimages
-# make_appimage
-make_appimage_hdf5
+make_appimage
