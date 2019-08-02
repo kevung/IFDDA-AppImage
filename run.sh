@@ -9,6 +9,7 @@
 HDF5=1 #0->fftw 1->hdf5
 LIBPATH=/usr/lib/x86_64-linux-gnu/
 LIBPATH2=/lib/x86_64-linux-gnu/
+LIBPATH3=/usr/lib/x86_64-linux-gnu/hdf5/serial/
 
 clone(){
 	git clone https://github.com/pchaumet/IF-DDA.git
@@ -41,27 +42,26 @@ get_appimages(){
 # sudo strace -f ./IFDDA.AppImage
 # create IFDDA AppImage
 make_appimage(){
-	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
-		-e IF-DDA/cdm/cdm \
-		-d ./ifdda.desktop \
-		-i ./postmanpat.png \
-		--library $LIBPATH2/libm.so.6 \
-		--library $LIBPATH/gtk-3.0/modules/libcanberra-gtk-module.so \
-		# --library $LIBPATH/libicui18n.so.64 
+        ./linuxdeploy-x86_64.AppImage --appdir=AppDir \
+        	-e IF-DDA/cdm/cdm \
+        	-d ./ifdda.desktop \
+        	-i ./postmanpat.png \
+        	--library $LIBPATH2/libm.so.6 \
+        	--library $LIBPATH/gtk-3.0/modules/libcanberra-gtk-module.so \
+        	# --library $LIBPATH/libicui18n.so.64 
 	if [[ $HDF5 == 1 ]]; then
 		./linuxdeploy-x86_64.AppImage --appdir=AppDir \
-		-d ./ifdda.desktop \
-		-i ./postmanpat.png \
+			-i ./postmanpat.png \
+			--library $LIBPATH2/libc.so.6 \
 			--library $LIBPATH2/libdl.so.2 \
 			--library $LIBPATH2/libpthread.so.0 \
-			--library $LIBPATH/libz.so.1 \
-			--library $LIBPATH/libc.so.6 \
-			--library $LIBPATH/libfuse.so.2 \
+			--library $LIBPATH2/libz.so.1 \
+			--library $LIBPATH2/libfuse.so.2 \
 			--library $LIBPATH/libfreetype.so.6 \
 			--library $LIBPATH/libGLU.so.1 \
 			--library $LIBPATH/libGL.so.1 \
 			--library $LIBPATH/libstdc++.so.6 \
-			--library $LIBPATH/libgcc_s.so.1 \
+			--library $LIBPATH2/libgcc_s.so.1 \
 			--library $LIBPATH/libGLX.so.0 \
 			--library $LIBPATH/libGLdispatch.so.0 \
 			--library $LIBPATH/libX11.so.6 \
@@ -70,26 +70,27 @@ make_appimage(){
 			--library $LIBPATH/libSM.so.6 \
 			--library $LIBPATH/libICE.so.6 \
 			--library $LIBPATH/libfontconfig.so.1 \
-			--library $LIBPATH/librt.so.1 \
-			--library $LIBPATH/libutil.so.1 \
+			--library $LIBPATH2/librt.so.1 \
+			--library $LIBPATH2/libutil.so.1 \
+			--library $LIBPATH2/libpcre.so.3 \
 			--library $LIBPATH/libharfbuzz.so.0 \
 			--library $LIBPATH/libxcb.so.1 \
-			--library $LIBPATH/libpcre.so.1 \
 			--library $LIBPATH/libffi.so.6 \
-			--library $LIBPATH/libuuid.so.1 \
-			--library $LIBPATH/libbsd.so.0 \
-			--library $LIBPATH/libexpat.so.1 \
+			--library $LIBPATH2/libuuid.so.1 \
+			--library $LIBPATH2/libbsd.so.0 \
+			--library $LIBPATH2/libexpat.so.1 \
 			--library $LIBPATH/libgraphite2.so.3 \
 			--library $LIBPATH/libXau.so.6 \
 			--library $LIBPATH/libXdmcp.so.6 \
-			--library $LIBPATH/libhdf5hl_fortran.so.100 
+			--library $LIBPATH3/libhdf5hl_fortran.so
+		# cp $LIBPATH/libharfbuzz.so.0 AppDir/usr/lib/
 	fi;
-	cp -r $LIBPATH/qt4/plugins/sqldrivers \
-		./AppDir/usr/bin
-	./linuxdeploy-x86_64.AppImage --appdir=AppDir \
-		-d ./ifdda.desktop \
-		-i ./postmanpat.png \
-		--output appimage
+        cp -r $LIBPATH/qt4/plugins/sqldrivers \
+        	./AppDir/usr/bin
+        ./linuxdeploy-x86_64.AppImage --appdir=AppDir \
+        	-d ./ifdda.desktop \
+        	-i ./postmanpat.png \
+        	--output appimage
 }
 
 clean(){
