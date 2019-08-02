@@ -6,7 +6,7 @@
 
 # download latest IFDDA version
 
-HDF5=1 #0->fftw 1->hdf5
+HDF5=0 #0->fftw 1->hdf5
 
 clone(){
 	git clone https://github.com/pchaumet/IF-DDA.git
