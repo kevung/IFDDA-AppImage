@@ -7,7 +7,8 @@
 # download latest IFDDA version
 
 HDF5=1 #0->fftw 1->hdf5
-LIBPATH=/usr/lib
+LIBPATH=/usr/lib/x86_64-linux-gnu/
+LIBPATH2=/lib/x86_64-linux-gnu/
 
 clone(){
 	git clone https://github.com/pchaumet/IF-DDA.git
@@ -44,15 +45,15 @@ make_appimage(){
 		-e IF-DDA/cdm/cdm \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
-		--library $LIBPATH/libm.so.6 \
-		--library $LIBPATH/gtk-2.0/modules/libcanberra-gtk-module.so \
-		--library $LIBPATH/libicui18n.so.64 
+		--library $LIBPATH2/libm.so.6 \
+		--library $LIBPATH/gtk-3.0/modules/libcanberra-gtk-module.so \
+		# --library $LIBPATH/libicui18n.so.64 
 	if [[ $HDF5 == 1 ]]; then
 		./linuxdeploy-x86_64.AppImage --appdir=AppDir \
 		-d ./ifdda.desktop \
 		-i ./postmanpat.png \
-			--library $LIBPATH/libdl.so.2 \
-			--library $LIBPATH/libpthread.so.0 \
+			--library $LIBPATH2/libdl.so.2 \
+			--library $LIBPATH2/libpthread.so.0 \
 			--library $LIBPATH/libz.so.1 \
 			--library $LIBPATH/libc.so.6 \
 			--library $LIBPATH/libfuse.so.2 \
